@@ -30,7 +30,7 @@ public class GameOverManager : MonoBehaviour
 
             if (restartTimer >= restartDelay)
             {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                SceneManager.LoadScene("MainMenu");
             }
         }
     }
