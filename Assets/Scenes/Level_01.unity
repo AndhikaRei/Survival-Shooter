@@ -382,11 +382,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerHealth: {fileID: 321381530}
-  enemy: {fileID: 6020653954634215084, guid: b14e56f27506f2f49ba5db964577dab3, type: 3}
   spawnTime: 1
   factory: {fileID: 700645947}
-  gameModeManager: {fileID: 0}
-  weaponUpgradeManager: {fileID: 0}
+  gameModeManager: {fileID: 531426837}
+  weaponUpgradeManager: {fileID: 2035437214}
   currentWave: 0
   currentWeight: 0
   spawnedEnemyTag: 
@@ -1081,7 +1080,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e606c2106a15e4468876da418245f5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyManager: {fileID: 0}
+  enemyManager: {fileID: 295319619}
 --- !u!4 &531426838
 Transform:
   m_ObjectHideFlags: 0
@@ -2162,7 +2161,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 512, y: 271}
+  m_AnchoredPosition: {x: 318.7, y: 120.16}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1277031180
@@ -2178,7 +2177,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 1, g: 0.9863347, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2186,13 +2185,13 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 46238fb1ad7a7a84ba8954c1c860994c, type: 3}
     m_FontSize: 14
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 10
     m_MaxSize: 40
-    m_Alignment: 0
+    m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0

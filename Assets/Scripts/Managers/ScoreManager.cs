@@ -34,9 +34,9 @@ public class ScoreManager : MonoBehaviour
         if (GameModeManager.gameMode == GameMode.Zen)
         {
             // Update and display survival time per second.
-            if (Time.time > survival_time + interval)
+            if (Time.timeSinceLevelLoad > survival_time + interval)
             {
-                survival_time = Time.time;
+                survival_time = Time.timeSinceLevelLoad;
             }
             // Format the displayed survival time to non zero precision (int).
 

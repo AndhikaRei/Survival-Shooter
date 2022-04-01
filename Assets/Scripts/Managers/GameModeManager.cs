@@ -15,7 +15,7 @@ public enum GameMode
 public class GameModeManager : MonoBehaviour
 {
     // Attribute initialization.
-    public static GameMode gameMode = GameMode.Zen;
+    public static GameMode gameMode;
     // Enemy manager.
     public EnemyManager enemyManager;
 
@@ -26,7 +26,7 @@ public class GameModeManager : MonoBehaviour
     Text waveText;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         // TODO: Get the game mode from main menu.
         gameMode = GameMode.Zen;
@@ -37,6 +37,8 @@ public class GameModeManager : MonoBehaviour
 
         // Get other object.
         enemyManager = GameObject.Find("EnemyManager").GetComponent<EnemyManager>();
+
+        Debug.Log(gameMode);
     }
 
     // Update is called once per frame

@@ -8,8 +8,8 @@ using Random=UnityEngine.Random;
 public class EnemyManager : MonoBehaviour
 {
     public PlayerHealth playerHealth;
-    public GameObject enemy;
-    public float spawnTime = 3f;
+
+    public float spawnTime = 1f;
 
 
     [SerializeField]
@@ -107,17 +107,20 @@ public class EnemyManager : MonoBehaviour
         // Get weapon upgrade manager object.
         weaponUpgradeManager = GameObject.Find("WeaponUpgradeManager").GetComponent<WeaponUpgradeManager>();
     }
+
     void Start ()
     {
         // If the game is zen mode, spawn enemy randomly and repeat.
         if (GameModeManager.gameMode == GameMode.Zen)
         {
+            Debug.Log("Zen mode");
             InvokeRepeating ("SpawnZen", spawnTime, spawnTime);
         }
         
         if (GameModeManager.gameMode == GameMode.Wave)
         {
             // If the game is wave mode then start the wave.
+            Debug.Log("Wave mode");
             StartWave();
         }
     }
@@ -158,7 +161,6 @@ public class EnemyManager : MonoBehaviour
             // Add 1 upgrade point every 30 second and make the spawning faster.
             if (Math.Floor(Math.Floor(ScoreManager.survival_time) / 30) > WeaponUpgradeManager.maxUpgrade )
             {
-                Debug.Log("Add 1 upgrade point");
                 WeaponUpgradeManager.maxUpgrade++;
                 // Divide spawn time by 2
                 spawnTime /= (float)(Math.Floor(Math.Floor(ScoreManager.survival_time) / 30));
