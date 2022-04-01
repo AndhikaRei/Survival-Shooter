@@ -19,18 +19,19 @@ public class PlayerMovement : MonoBehaviour
 		playerRigidBody = GetComponent<Rigidbody>();
 	}
 
-	private void FixedUpdate() {
-		// Mendapatkan nilai input horizontal (-1,0,1)
-		float h = Input.GetAxisRaw("Horizontal");
+	// TODO: This part is commented because we already used command pattern. 
+	// private void FixedUpdate() {
+	// 	// Mendapatkan nilai input horizontal (-1,0,1)
+	// 	float h = Input.GetAxisRaw("Horizontal");
 
-		// Mendapatkan nilai input vertical (-1,0,1)
-		float v = Input.GetAxisRaw("Vertical");
+	// 	// Mendapatkan nilai input vertical (-1,0,1)
+	// 	float v = Input.GetAxisRaw("Vertical");
 
-		// Membuat movement berdasarkan input horizontal dan vertical.
-		Move(h, v);
-		Turning();
-		Animating(h, v);
-	}
+	// 	// Membuat movement berdasarkan input horizontal dan vertical.
+	// 	Move(h, v);
+	// 	Turning();
+	// 	Animating(h, v);
+	// }
 
 	public void Animating(float h, float v) {
 		bool walking = h != 0f || v != 0f;
@@ -49,7 +50,7 @@ public class PlayerMovement : MonoBehaviour
 		playerRigidBody.MovePosition(transform.position + movement);
 	}
 
-	void Turning() {
+	public void Turning() {
 		//Buat Ray dari posisi mouse di layar
 		Ray camRay = Camera.main.ScreenPointToRay(Input.mousePosition);
 

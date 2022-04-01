@@ -17,6 +17,9 @@ public class MoveCommand : Command
     public override void Execute()
     {
         playerMovement.Move(h, v);
+
+        playerMovement.Turning();
+
         // Animating player.
         playerMovement.Animating(h, v);
     }

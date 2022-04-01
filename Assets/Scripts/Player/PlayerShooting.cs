@@ -1,12 +1,20 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections.Generic;
+using UnityEngine;
 
 public class PlayerShooting : MonoBehaviour
 {
     public int damagePerShot = 20;                  
-    public float timeBetweenBullets = 0.15f;        
-    public float range = 100f;                      
+    public float timeBetweenBullets = 0.2f;        
+    public float range = 100f;
 
-    float timer;                                    
+    // Diagonal shoot weapon upgrade.
+    public int diagonalUpgrade = 0;         
+
+    // Attack Speed.
+    public int aspdUpgrade = 0;  
+
+    public float timer;                                    
     Ray shootRay;                                   
     RaycastHit shootHit;                            
     int shootableMask;                             
@@ -14,7 +22,7 @@ public class PlayerShooting : MonoBehaviour
     LineRenderer gunLine;                           
     AudioSource gunAudio;                           
     Light gunLight;                                 
-    float effectsDisplayTime = 0.2f;                
+    public float effectsDisplayTime = 0.2f;                
 
     void Awake()
     {
@@ -32,12 +40,12 @@ public class PlayerShooting : MonoBehaviour
     {
         timer += Time.deltaTime;
 
-        if (Input.GetButton("Fire1") && timer >= timeBetweenBullets)
+        if (Input.GetButton("Fire1") && timer >= timeBetweenBullets / (aspdUpgrade + 1))
         {
             Shoot();
         }
 
-        if (timer >= timeBetweenBullets * effectsDisplayTime)
+        if (timer >= (timeBetweenBullets * effectsDisplayTime) / (aspdUpgrade + 1))
         {
             DisableEffects();
         }
@@ -65,32 +73,53 @@ public class PlayerShooting : MonoBehaviour
 
         // Enable line renderer dan set posisi awal.
         gunLine.enabled = true;
-        gunLine.SetPosition(0, transform.position);
 
-        // Set posisi ray shoot dan direction.
-        shootRay.origin = transform.position;
-        shootRay.direction = transform.forward;
+        // Initialize number of point in line and initialize empty point array.
+        gunLine.positionCount = 2 + (diagonalUpgrade*4);
+        List<Vector3> points = new List<Vector3>();
 
-        // Lakukan raycast jika menemukan object yang dapat di shoot.
-        if (Physics.Raycast(shootRay, out shootHit, range, shootableMask))
+        for (int i = 0; i <= diagonalUpgrade ; i++)
         {
-            // Lakukan raycast hit untuk mendapatkan informasi enemy.
-            EnemyHealth enemyHealth = shootHit.collider.GetComponent<EnemyHealth>();
+            // Set posisi ray shoot dan direction.
+            shootRay.origin = transform.position;
+            
+            // Get number of lines shoot, if diagonal shoot, then shoot 2 lines else shoot 1 lines. 
+            int numLines = i == 0 ? 1 : 2;
 
-            if (enemyHealth != null)
+            for (int j = -1; j < numLines; j+=2) 
             {
-                // Berikan damage ke enemy.
-                enemyHealth.TakeDamage(damagePerShot, shootHit.point);
+                // Perhatikan apabila i==0 maka sudut quaternion akan selalu (0,0,0)
+                // Jika i != 0 maka sudut quaternion akan berubah sesuai i (0, 30*i*j, 0), J \
+                // antara 1 atau -1.
+                shootRay.direction = Quaternion.Euler(0, i*j*10, 0) * transform.forward;
 
+                // Lakukan raycast jika menemukan object yang dapat di shoot.
+                if (Physics.Raycast(shootRay, out shootHit, range, shootableMask))
+                {
+                    // Lakukan raycast hit untuk mendapatkan informasi enemy.
+                    EnemyHealth enemyHealth = shootHit.collider.GetComponent<EnemyHealth>();
+
+                    if (enemyHealth != null)
+                    {
+                        // Berikan damage ke enemy.
+                        enemyHealth.TakeDamage(damagePerShot, shootHit.point);
+                    }
+
+                    // Simpan point origin tembakan dan point lokasi tembakan.
+                    points.Add(transform.position);
+                    points.Add(shootHit.point);
+                }
+                else
+                {
+                    // Simpan point origin tembakan dan point lokasi tembakan.
+                    points.Add(transform.position);
+                    points.Add(shootRay.origin + shootRay.direction * range);
+                }   
             }
+             
+        }
 
-            // Set line position ke posisi hit.
-            gunLine.SetPosition(1, shootHit.point);
-        }
-        else
-        {
-            // Set line position ke posisi ray shoot + range.
-            gunLine.SetPosition(1, shootRay.origin + shootRay.direction * range);
-        }
+        // Set posisi line renderer.
+        gunLine.SetPositions(points.ToArray());
     }
 }

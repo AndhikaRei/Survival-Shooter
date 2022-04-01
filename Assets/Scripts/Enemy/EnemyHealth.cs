@@ -7,7 +7,10 @@ public class EnemyHealth : MonoBehaviour
     public float sinkSpeed = 2.5f;
     public int scoreValue = 10;
     public AudioClip deathClip;
-
+    // Enemy manager.
+    public EnemyManager enemyManager;
+    // Game mode manager.
+    public GameModeManager gameModeManager;
 
     Animator anim;
     AudioSource enemyAudio;
@@ -24,6 +27,8 @@ public class EnemyHealth : MonoBehaviour
         enemyAudio = GetComponent <AudioSource> ();
         hitParticles = GetComponentInChildren <ParticleSystem> ();
         capsuleCollider = GetComponent <CapsuleCollider> ();
+        enemyManager = GameObject.Find("EnemyManager").GetComponent<EnemyManager>();
+        gameModeManager = GameObject.Find("GameModeManager").GetComponent<GameModeManager>();
 
         // Inisialisasi currentHealth.
         currentHealth = startingHealth;
@@ -78,6 +83,12 @@ public class EnemyHealth : MonoBehaviour
         // Play audio dead.
         enemyAudio.clip = deathClip;
         enemyAudio.Play ();
+
+        // Add the number of killed enemy if the game is wave mode.
+        if (GameModeManager.gameMode == GameMode.Wave)
+        {
+            enemyManager.killedEnemyAmount++;
+        }
     }
 
 
@@ -88,7 +99,12 @@ public class EnemyHealth : MonoBehaviour
         // Set rigidbody ke kinematic.
         GetComponent<Rigidbody> ().isKinematic = true;
         isSinking = true;
-        ScoreManager.score += scoreValue;
+        
+        // Update the score when the game is not zen mode.
+        if (GameModeManager.gameMode != GameMode.Zen)
+        {
+            ScoreManager.score += scoreValue;
+        }
         Destroy (gameObject, 2f);
     }
 }

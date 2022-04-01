@@ -11,23 +11,15 @@ public class InputHandler : MonoBehaviour
     void FixedUpdate()
     {
         //Menghandle input movement
-        Command moveCommand = InputMovementHandling();
+        Command moveCommand = InputHandling();
         if (moveCommand != null)
         {
             commands.Enqueue(moveCommand);
             moveCommand.Execute();
         }
     }
-    void Update()
-    {
-        //Mengahndle shoot
-        Command shootCommand = InputShootHandling();
-        if (shootCommand != null)
-        {
-            shootCommand.Execute();
-        }
-    }
-    Command InputMovementHandling()
+    
+    Command InputHandling()
     {
         //Check jika movement sesuai dengan key nya
         if (Input.GetKey(KeyCode.D))
@@ -53,7 +45,7 @@ public class InputHandler : MonoBehaviour
         }
         else
         {
-            return new MoveCommand(playerMovement, 0, 0); ;
+            return new MoveCommand(playerMovement, 0, 0);
         }
     }
 
@@ -67,16 +59,30 @@ public class InputHandler : MonoBehaviour
         }
         return null;
     }
-    Command InputShootHandling()
-    {
-        //Jika menembak trigger shoot command
-        if (Input.GetButtonDown("Fire1"))
-        {
-            return new ShootCommand(playerShooting);
-        }
-        else
-        {
-            return null;
-        }
-    }
+
+    // TODO: Shoot from command pattern still buggy.
+    // void Update()
+    // {
+    //     Debug.Log("Update");
+    //     //Mengahndle shoot
+    //     Command shootCommand = InputShootHandling();
+    //     if (shootCommand != null)
+    //     {
+    //         shootCommand.Execute();
+    //     }
+    // }
+    
+    // Command InputShootHandling()
+    // {
+    //     // Jika menembak trigger shoot command
+    //     if (Input.GetButtonDown("Fire1"))
+    //     {
+    //         Debug.Log("Shoot");
+    //         return new ShootCommand(playerShooting);
+    //     }
+    //     else
+    //     {
+    //         return null;
+    //     }
+    // }
 }

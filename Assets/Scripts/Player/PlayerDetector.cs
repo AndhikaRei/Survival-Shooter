@@ -9,8 +9,6 @@ public class PlayerDetector : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         // Write in log.
-        Debug.Log("Other tag:" + other.tag.ToString());
-        Debug.Log("Other is trigger:" + other.isTrigger.ToString());
         if (other.tag == "Enemy" && !other.isTrigger)
         {
             float enemyDistance = Vector3.Distance(transform.position,other.transform.position);
