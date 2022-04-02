@@ -15,7 +15,7 @@ public enum GameMode
 public class GameModeManager : MonoBehaviour
 {
     // Attribute initialization.
-    public static GameMode gameMode;
+    public static GameMode gameMode = GameMode.Zen;
     // Enemy manager.
     public EnemyManager enemyManager;
 
@@ -29,7 +29,7 @@ public class GameModeManager : MonoBehaviour
     void Awake()
     {
         // TODO: Get the game mode from main menu.
-        gameMode = GameMode.Zen;
+        // gameMode = GameMode.Zen;
 
         // Get the gameModeText from hudcanvas.
         gameModeText = GameObject.Find("GameMode").GetComponent<Text>();

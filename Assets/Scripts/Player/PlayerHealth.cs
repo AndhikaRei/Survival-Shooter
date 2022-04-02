@@ -2,9 +2,11 @@
 using UnityEngine.UI;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class PlayerHealth : MonoBehaviour
 {
+    public static string playerName = "Player";
     public int startingHealth = 100;
     public int currentHealth;
     public Slider healthSlider;
@@ -31,6 +33,8 @@ public class PlayerHealth : MonoBehaviour
 
         //playerShooting = GetComponentInChildren<PlayerShooting>();
         currentHealth = startingHealth;
+
+        GameObject.Find("PlayerName").GetComponent<TMP_Text>().text = playerName;
     }
 
 
