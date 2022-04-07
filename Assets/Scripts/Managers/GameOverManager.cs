@@ -43,8 +43,6 @@ public class GameOverManager : MonoBehaviour
         if (playerHealth.currentHealth <= 0 && !isDead)
         {
             isDead = true;
-            // TODO: add score to scoreboard and show
-
             if (GameModeManager.gameMode == GameMode.Zen)
             {
                 waveTimeval.text = Math.Floor((ScoreManager.survival_time)) + " s";
@@ -75,6 +73,10 @@ public class GameOverManager : MonoBehaviour
 
     public void NewGame()
     {
+        WeaponUpgradeManager.maxUpgrade = 0;
+        WeaponUpgradeManager.aspdUpgrade = 0;
+        WeaponUpgradeManager.diagonalArrowUpgrade = 0;
+
         gameOverScreen.SetActive(false);
         SceneManager.LoadScene(1);
     }

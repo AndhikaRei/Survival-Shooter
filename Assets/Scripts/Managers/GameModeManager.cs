@@ -29,7 +29,7 @@ public class GameModeManager : MonoBehaviour
     void Awake()
     {
         // TODO: Get the game mode from main menu.
-        // gameMode = GameMode.Zen;
+        //gameMode = GameMode.Wave;
 
         // Get the gameModeText from hudcanvas.
         gameModeText = GameObject.Find("GameMode").GetComponent<Text>();

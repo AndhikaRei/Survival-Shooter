@@ -88,6 +88,7 @@ public class EnemyHealth : MonoBehaviour
         if (GameModeManager.gameMode == GameMode.Wave)
         {
             enemyManager.killedEnemyAmount++;
+            ScoreManager.score += scoreValue;
         }
     }
 
@@ -100,11 +101,6 @@ public class EnemyHealth : MonoBehaviour
         GetComponent<Rigidbody> ().isKinematic = true;
         isSinking = true;
         
-        // Update the score when the game is not zen mode.
-        if (GameModeManager.gameMode != GameMode.Zen)
-        {
-            ScoreManager.score += scoreValue;
-        }
         Destroy (gameObject, 2f);
     }
 }

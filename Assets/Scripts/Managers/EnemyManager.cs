@@ -99,6 +99,8 @@ public class EnemyManager : MonoBehaviour
     public int spawnedEnemyAmount = 0;
     // Killed enemy amount.
     public int killedEnemyAmount = 0;
+    // Player win condition
+    public bool gameWon = false;
 
     void Awake()
     {
@@ -136,7 +138,7 @@ public class EnemyManager : MonoBehaviour
                 CancelInvoke("SpawnWave");
             }
 
-            // If the killed enemy amount is equal to the spawned enemy amount adn wave has 
+            // If the killed enemy amount is equal to the spawned enemy amount and wave has 
             // been started then start the next wave.
             if (killedEnemyAmount == spawnedEnemyAmount)
             {
@@ -145,13 +147,20 @@ public class EnemyManager : MonoBehaviour
                 {
                     WeaponUpgradeManager.maxUpgrade++;
                 }
-                NextWave();
-            }
 
-            // If the current wave is max wave, then stop the wave.
-            if (currentWave > maxWave)
-            {
-                StopWave();
+                // Completed wave, start next wave
+                if (currentWave < maxWave)
+                {
+                    NextWave();
+                }
+
+                // Completed last wave
+                else if (currentWave == maxWave && !gameWon)
+                {
+                    StopWave();
+                }
+                
+        
             }
         }
 
@@ -295,13 +304,17 @@ public class EnemyManager : MonoBehaviour
     void StopWave() {
         // Cancel the invoke.
         CancelInvoke("SpawnWave");
+
+        // Set gameWon
+        gameWon = true;
+
         // Reset the wave data.
         spawnedEnemyTag.Clear();
         spawnedWeight = 0;
         spawnedEnemyAmount = 0;
         killedEnemyAmount = 0;
         // Reset current wave.
-        currentWave = 0;
+        //currentWave = 0;
 
         // TODO: Instead of making player dead, end the wave mode game.
         // Make player dead.
