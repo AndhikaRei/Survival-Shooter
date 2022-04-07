@@ -1,12 +1,15 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 public class PlayerMovement : MonoBehaviour
 {
 	public float speed = 6f;
+	public float maxSpeed = 10f;    
 	Vector3 movement;
 	Animator anim;
 	Rigidbody playerRigidBody;
 	int floorMask;
 	float camRayLength = 100f;
+    Text speedText;
 
 	private void Awake() {
 		// Mendapatkan nilai mask dari layer yang bernama floor.
@@ -17,6 +20,9 @@ public class PlayerMovement : MonoBehaviour
 
 		// Mendapatkan komponen rigidbody.
 		playerRigidBody = GetComponent<Rigidbody>();
+
+		// Get the speedText from hudcanvas.
+		speedText = GameObject.Find("Speed").GetComponent<Text>();
 	}
 
     // TODO: This part is commented because we already used command pattern. 
@@ -32,6 +38,8 @@ public class PlayerMovement : MonoBehaviour
         Move(h, v);
         Turning();
         Animating(h, v);
+
+		speedText.text = speed.ToString();
     }
 
     public void Animating(float h, float v) {

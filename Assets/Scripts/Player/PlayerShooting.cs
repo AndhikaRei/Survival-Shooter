@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerShooting : MonoBehaviour
 {
-    public int damagePerShot = 20;                  
+    public int damagePerShot = 20;
+    public int maxDamagePerShot = 50;                     
     public float timeBetweenBullets = 0.2f;        
     public float range = 100f;
 
@@ -23,7 +25,7 @@ public class PlayerShooting : MonoBehaviour
     AudioSource gunAudio;                           
     Light gunLight;                                 
     public float effectsDisplayTime = 0.2f;                
-
+    Text powerText;
     void Awake()
     {
         // Get Mask.
@@ -34,6 +36,9 @@ public class PlayerShooting : MonoBehaviour
         gunLine = GetComponent<LineRenderer>();
         gunAudio = GetComponent<AudioSource>();
         gunLight = GetComponent<Light>();
+
+        // Get the powerText from hudcanvas.
+        powerText = GameObject.Find("Power").GetComponent<Text>();
     }
 
     void Update()
@@ -49,6 +54,8 @@ public class PlayerShooting : MonoBehaviour
         {
             DisableEffects();
         }
+
+       powerText.text = damagePerShot.ToString();
     }
 
     public void DisableEffects()

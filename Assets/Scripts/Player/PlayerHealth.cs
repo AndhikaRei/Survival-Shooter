@@ -9,6 +9,7 @@ public class PlayerHealth : MonoBehaviour
     public static string playerName = "Player";
     public int startingHealth = 100;
     public int currentHealth;
+    public int maxHealth = 300;
     public Slider healthSlider;
     public Image damageImage;
     public AudioClip deathClip;
@@ -23,6 +24,7 @@ public class PlayerHealth : MonoBehaviour
     bool isDead;                                                
     bool damaged;                                               
 
+    Text healthText;
 
     void Awake()
     {
@@ -33,7 +35,10 @@ public class PlayerHealth : MonoBehaviour
 
         playerShooting = GetComponentInChildren<PlayerShooting>();
         currentHealth = startingHealth;
-
+        
+        // Get the healthText from hudcanvas.
+        healthText = GameObject.Find("Health").GetComponent<Text>();
+        
         GameObject.Find("PlayerName").GetComponent<TMP_Text>().text = playerName;
     }
 
@@ -51,7 +56,7 @@ public class PlayerHealth : MonoBehaviour
             // Fade out damage image.
             damageImage.color = Color.Lerp(damageImage.color, Color.clear, flashSpeed * Time.deltaTime);
         }
-
+        healthText.text = currentHealth.ToString();
         damaged = false;
     }
 
