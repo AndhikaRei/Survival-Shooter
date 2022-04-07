@@ -19,21 +19,22 @@ public class PlayerMovement : MonoBehaviour
 		playerRigidBody = GetComponent<Rigidbody>();
 	}
 
-	// TODO: This part is commented because we already used command pattern. 
-	// private void FixedUpdate() {
-	// 	// Mendapatkan nilai input horizontal (-1,0,1)
-	// 	float h = Input.GetAxisRaw("Horizontal");
+    // TODO: This part is commented because we already used command pattern. 
+    private void FixedUpdate()
+    {
+        // Mendapatkan nilai input horizontal (-1,0,1)
+        float h = Input.GetAxisRaw("Horizontal");
 
-	// 	// Mendapatkan nilai input vertical (-1,0,1)
-	// 	float v = Input.GetAxisRaw("Vertical");
+        // Mendapatkan nilai input vertical (-1,0,1)
+        float v = Input.GetAxisRaw("Vertical");
 
-	// 	// Membuat movement berdasarkan input horizontal dan vertical.
-	// 	Move(h, v);
-	// 	Turning();
-	// 	Animating(h, v);
-	// }
+        // Membuat movement berdasarkan input horizontal dan vertical.
+        Move(h, v);
+        Turning();
+        Animating(h, v);
+    }
 
-	public void Animating(float h, float v) {
+    public void Animating(float h, float v) {
 		bool walking = h != 0f || v != 0f;
 		anim.SetBool("IsWalking", walking);
 	}

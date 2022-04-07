@@ -2,11 +2,13 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using TMPro;
 
 public class ScoreManager : MonoBehaviour
 {
     public static int score;
     public static float survival_time;
+    public PlayerHealth playerHealth;
 
     public int interval = 1;
 
@@ -14,6 +16,8 @@ public class ScoreManager : MonoBehaviour
     public GameModeManager gameModeManager;
 
     Text text;
+    public TMP_Text gameOverTimeText;
+    public TMP_Text gameOverScoreText;
 
 
     void Awake ()
@@ -34,7 +38,7 @@ public class ScoreManager : MonoBehaviour
         if (GameModeManager.gameMode == GameMode.Zen)
         {
             // Update and display survival time per second.
-            if (Time.timeSinceLevelLoad > survival_time + interval)
+            if (Time.timeSinceLevelLoad > survival_time + interval && playerHealth.currentHealth > 0)
             {
                 survival_time = Time.timeSinceLevelLoad;
             }
