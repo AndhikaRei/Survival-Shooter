@@ -76,6 +76,8 @@ public class GameOverManager : MonoBehaviour
         WeaponUpgradeManager.maxUpgrade = 0;
         WeaponUpgradeManager.aspdUpgrade = 0;
         WeaponUpgradeManager.diagonalArrowUpgrade = 0;
+        WeaponUpgradeManager.penetUpgrade = 0;
+        ScoreManager.survival_time = 0;
 
         gameOverScreen.SetActive(false);
         SceneManager.LoadScene(1);

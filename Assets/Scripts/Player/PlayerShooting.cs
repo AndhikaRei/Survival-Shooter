@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,11 +15,16 @@ public class PlayerShooting : MonoBehaviour
     public int diagonalUpgrade = 0;         
 
     // Attack Speed.
-    public int aspdUpgrade = 0;  
+    public int aspdUpgrade = 0;
+
+    // Multi shot
+    public int penetUpgrade = 0;
 
     public float timer;                                    
     Ray shootRay;                                   
-    RaycastHit shootHit;                            
+    RaycastHit shootHit;
+    RaycastHit[] hitPoints;
+    bool reachMaxRange;
     int shootableMask;                             
     ParticleSystem gunParticles;                    
     LineRenderer gunLine;                           
@@ -100,28 +106,44 @@ public class PlayerShooting : MonoBehaviour
                 // antara 1 atau -1.
                 shootRay.direction = Quaternion.Euler(0, i*j*10, 0) * transform.forward;
 
-                // Lakukan raycast jika menemukan object yang dapat di shoot.
-                if (Physics.Raycast(shootRay, out shootHit, range, shootableMask))
-                {
-                    // Lakukan raycast hit untuk mendapatkan informasi enemy.
-                    EnemyHealth enemyHealth = shootHit.collider.GetComponent<EnemyHealth>();
+                points.Add(transform.position);
 
+                // Lakukan raycast hit untuk mendapatkan informasi enemy.
+                hitPoints = Physics.RaycastAll(shootRay, range, shootableMask).OrderBy(h => h.distance).ToArray();
+                hitPoints = hitPoints.GroupBy(h => h.transform).Select(g => g.First()).ToArray();
+
+                int hitCount;
+
+                if (hitPoints.Length < penetUpgrade + 1)
+                {
+                    reachMaxRange = true;
+                    hitCount = hitPoints.Length;
+                } 
+                else
+                {
+                    reachMaxRange = false;
+                    hitCount = penetUpgrade + 1;
+                }
+
+                for (int k = 0; k < hitCount; k++)
+                {
+                    EnemyHealth enemyHealth = hitPoints[k].collider.GetComponent<EnemyHealth>();
+                    
                     if (enemyHealth != null)
                     {
                         // Berikan damage ke enemy.
-                        enemyHealth.TakeDamage(damagePerShot, shootHit.point);
+                        enemyHealth.TakeDamage(damagePerShot, hitPoints[k].point);
                     }
+                }
 
-                    // Simpan point origin tembakan dan point lokasi tembakan.
-                    points.Add(transform.position);
-                    points.Add(shootHit.point);
+                if (reachMaxRange)
+                {
+                    points.Add(shootRay.origin + shootRay.direction * range);
                 }
                 else
                 {
-                    // Simpan point origin tembakan dan point lokasi tembakan.
-                    points.Add(transform.position);
-                    points.Add(shootRay.origin + shootRay.direction * range);
-                }   
+                    points.Add(hitPoints[hitCount-1].point);
+                }
             }
              
         }

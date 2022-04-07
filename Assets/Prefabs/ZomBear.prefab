@@ -314,6 +314,8 @@ MonoBehaviour:
   sinkSpeed: 2.5
   scoreValue: 10
   deathClip: {fileID: 8300000, guid: 62366b8d2c37a49dca550841c741317f, type: 3}
+  enemyManager: {fileID: 0}
+  gameModeManager: {fileID: 0}
 --- !u!114 &2931652463854435039
 MonoBehaviour:
   m_ObjectHideFlags: 0

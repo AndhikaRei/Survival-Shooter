@@ -19,6 +19,11 @@ public class WeaponUpgradeManager : MonoBehaviour
     Text upgradeText;
     Button aspdButton;
 
+    // PenetrationUpgrade.
+    public static int penetUpgrade = 0;
+    Text penetLevel;
+    Button penetButton;
+
     // Player shooting.
     public PlayerShooting playerShooting;
 
@@ -30,6 +35,8 @@ public class WeaponUpgradeManager : MonoBehaviour
         diagonalArrowButton = GameObject.Find("DiagonaArrowButton").GetComponent<Button>();
         aspdLevel = GameObject.Find("AspdLevel").GetComponent<Text>();
         aspdButton = GameObject.Find("AspdButton").GetComponent<Button>();
+        penetLevel = GameObject.Find("PenetLevel").GetComponent<Text>();
+        penetButton = GameObject.Find("PenetButton").GetComponent<Button>();
         upgradeText = GameObject.Find("UpgradeText").GetComponent<Text>();
 
         // Get player shooting.
@@ -41,36 +48,47 @@ public class WeaponUpgradeManager : MonoBehaviour
     {
         // If number of upgrade is less than maximum upgrade, enable the button and turn the color
         // into green.
-        if (maxUpgrade > diagonalArrowUpgrade + aspdUpgrade) {
+        if (maxUpgrade > diagonalArrowUpgrade + aspdUpgrade + penetUpgrade) {
             diagonalArrowButton.interactable = true;
             aspdButton.interactable = true;
+            penetButton.interactable = true;
             upgradeText.text = "Upgrade is Available!!!";
 
             // The green color rgb is 103, 200, 28.
             diagonalArrowButton.GetComponentInChildren<Text>().color = new Color32(103, 200, 28, 255);
             aspdButton.GetComponentInChildren<Text>().color = new Color32(103, 200, 28, 255);
+            penetButton.GetComponentInChildren<Text>().color = new Color32(103, 200, 28, 255);
         }
         else 
         {
             // Else, disable the button and turn the button text into gray.
             diagonalArrowButton.interactable = false;
             aspdButton.interactable = false;
+            penetButton.interactable = false;
             upgradeText.text = "";
 
             diagonalArrowButton.GetComponentInChildren<Text>().color = 
                 new Color32(211, 211, 211, 255);
             aspdButton.GetComponentInChildren<Text>().color = 
                 new Color32(211, 211, 211, 255);
+            penetButton.GetComponentInChildren<Text>().color =
+                new Color32(211, 211, 211, 255);
         }
 
+        
+
         // Get input command from player. Q for diagonal arrow updgrade, E for attack speed upgrade.
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             upgradeDiagonalArrow();
         }
-        else if (Input.GetKeyDown(KeyCode.E))
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             upgradeAspd();
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            upgradePenet();
         }
     }
 
@@ -78,7 +96,7 @@ public class WeaponUpgradeManager : MonoBehaviour
     public void upgradeDiagonalArrow()
     {
         // If the upgrade is less than maximum upgrade, upgrade the upgrade.
-        if (diagonalArrowUpgrade + aspdUpgrade < maxUpgrade)
+        if (diagonalArrowUpgrade + aspdUpgrade + penetUpgrade < maxUpgrade)
         {
             diagonalArrowUpgrade++;
             diagonalArrowLevel.text = "Lv " + diagonalArrowUpgrade;
@@ -90,11 +108,22 @@ public class WeaponUpgradeManager : MonoBehaviour
     public void upgradeAspd()
     {
         // If the upgrade is less than maximum upgrade, upgrade the upgrade.
-        if (diagonalArrowUpgrade + aspdUpgrade < maxUpgrade)
+        if (diagonalArrowUpgrade + aspdUpgrade + penetUpgrade < maxUpgrade)
         {
             aspdUpgrade++;
             aspdLevel.text = "Lv " + aspdUpgrade;
             playerShooting.aspdUpgrade++;
+        }
+    }
+
+    // Function to upgrade penetration
+    public void upgradePenet()
+    {
+        if (diagonalArrowUpgrade + aspdUpgrade + penetUpgrade < maxUpgrade)
+        {
+            penetUpgrade++;
+            penetLevel.text = "Lv " + penetUpgrade;
+            playerShooting.penetUpgrade++;
         }
     }
 
