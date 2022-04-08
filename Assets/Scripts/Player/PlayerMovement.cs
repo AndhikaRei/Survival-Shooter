@@ -1,7 +1,15 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+
+public enum CameraMode
+{
+	TPS,
+	FPS
+}
 public class PlayerMovement : MonoBehaviour
 {
+	public static CameraMode cameraMode = CameraMode.FPS;
+
 	public float speed = 6f;
 	public float maxSpeed = 10f;    
 	Vector3 movement;
@@ -34,10 +42,13 @@ public class PlayerMovement : MonoBehaviour
         // Mendapatkan nilai input vertical (-1,0,1)
         float v = Input.GetAxisRaw("Vertical");
 
-        // Membuat movement berdasarkan input horizontal dan vertical.
-        Move(h, v);
-        Turning();
-        Animating(h, v);
+		// Membuat movement berdasarkan input horizontal dan vertical.
+		if (cameraMode == CameraMode.TPS)
+		{
+			Move(h, v);
+			Turning();
+			Animating(h, v);
+		}
 
 		speedText.text = speed.ToString();
     }
