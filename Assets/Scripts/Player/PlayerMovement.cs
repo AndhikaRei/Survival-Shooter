@@ -79,4 +79,16 @@ public class PlayerMovement : MonoBehaviour
 			playerRigidBody.MoveRotation(newRotation);
 		}
 	}
+
+	public void PickupOrb(float amount)
+    {
+        // Menambahkan speed dengan amount.
+        if(speed + amount >= maxSpeed){
+            speed = maxSpeed;
+        }else{
+            speed += amount;
+        }
+        
+        speedText.text = speed.ToString();
+    }
 }

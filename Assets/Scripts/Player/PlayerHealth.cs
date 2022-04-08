@@ -9,7 +9,7 @@ public class PlayerHealth : MonoBehaviour
     public static string playerName = "Player";
     public int startingHealth = 100;
     public int currentHealth;
-    public int maxHealth = 300;
+    public int maxHealth = 500;
     public Slider healthSlider;
     public Image damageImage;
     public AudioClip deathClip;
@@ -81,6 +81,20 @@ public class PlayerHealth : MonoBehaviour
         {
             Death();
         }
+    }
+
+    public void PickupOrb(int amount)
+    {
+        // Menambahkan currentHealth dengan amount.
+        if(currentHealth + amount >= maxHealth){
+            currentHealth = maxHealth;
+        }else{
+            currentHealth += amount;
+        }
+        
+        // Update health slider and health data.
+        healthSlider.value = currentHealth;
+        healthText.text = currentHealth.ToString();
     }
 
 

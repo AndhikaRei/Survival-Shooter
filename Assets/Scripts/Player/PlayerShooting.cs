@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class PlayerShooting : MonoBehaviour
 {
     public int damagePerShot = 20;
-    public int maxDamagePerShot = 50;                     
+    public int maxDamagePerShot = 100;                     
     public float timeBetweenBullets = 0.2f;        
     public float range = 100f;
 
@@ -150,5 +150,18 @@ public class PlayerShooting : MonoBehaviour
 
         // Set posisi line renderer.
         gunLine.SetPositions(points.ToArray());
+    }
+
+    public void PickupOrb(int amount)
+    {
+        // Menambahkan damagePerShot dengan amount.
+        if(damagePerShot + amount >= maxDamagePerShot){
+            damagePerShot = maxDamagePerShot;
+        }else{
+           damagePerShot += amount;
+        }
+        
+        // Update power data.
+        powerText.text = damagePerShot.ToString();
     }
 }
