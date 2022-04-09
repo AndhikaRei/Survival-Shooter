@@ -24,7 +24,7 @@ public class PowerUpSpawner : MonoBehaviour
             int spawnOrb = Random.Range(0,3);
 
             // Random Position
-            Vector3 randomSpawnPosition = new Vector3(Random.Range(-24,25), 1, Random.Range(-24,25) );
+            Vector3 randomSpawnPosition = new Vector3(Random.Range(-20,21), 1, Random.Range(-20,21) );
             if(spawnOrb == 1){
                 Instantiate(powerOrbPrefab, randomSpawnPosition, Quaternion.identity);
                 Debug.Log("An Power Orb Spawned on" + randomSpawnPosition.ToString());
