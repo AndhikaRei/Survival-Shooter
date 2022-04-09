@@ -1,14 +1,11 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public enum CameraMode
+class PlayerMovement : MonoBehaviour
 {
-	TPS,
-	FPS
-}
-public class PlayerMovement : MonoBehaviour
-{
-	public static CameraMode cameraMode = CameraMode.FPS;
+	public GameObject mainCamera;
+	public GameObject tpsView;
+	public GameObject fpsView;
 
 	public float speed = 6f;
 	public float maxSpeed = 10f;    
@@ -20,6 +17,20 @@ public class PlayerMovement : MonoBehaviour
     Text speedText;
 
 	private void Awake() {
+
+		if (CameraModeManager.cameraMode == CameraMode.TPS)
+        {
+			mainCamera.SetActive(true);
+			tpsView.SetActive(true);
+			fpsView.SetActive(false);
+        }
+		else if (CameraModeManager.cameraMode == CameraMode.FPS)
+        {
+			mainCamera.SetActive(false);
+			tpsView.SetActive(false);
+			fpsView.SetActive(true);
+		}
+
 		// Mendapatkan nilai mask dari layer yang bernama floor.
 		floorMask = LayerMask.GetMask("Floor");
 
@@ -31,6 +42,7 @@ public class PlayerMovement : MonoBehaviour
 
 		// Get the speedText from hudcanvas.
 		speedText = GameObject.Find("Speed").GetComponent<Text>();
+
 	}
 
     // TODO: This part is commented because we already used command pattern. 
@@ -43,12 +55,16 @@ public class PlayerMovement : MonoBehaviour
         float v = Input.GetAxisRaw("Vertical");
 
 		// Membuat movement berdasarkan input horizontal dan vertical.
-		if (cameraMode == CameraMode.TPS)
+		if (CameraModeManager.cameraMode == CameraMode.TPS)
 		{
 			Move(h, v);
 			Turning();
 			Animating(h, v);
 		}
+		else if (CameraModeManager.cameraMode == CameraMode.FPS)
+        {
+			FPSMove(h, v);
+        }
 
 		speedText.text = speed.ToString();
     }
@@ -56,6 +72,12 @@ public class PlayerMovement : MonoBehaviour
     public void Animating(float h, float v) {
 		bool walking = h != 0f || v != 0f;
 		anim.SetBool("IsWalking", walking);
+	}
+
+	public void FPSMove(float h, float v) { 
+		Vector3 move = transform.right * h + transform.forward * v;
+
+		playerRigidBody.MovePosition(transform.position + move * speed * Time.deltaTime);
 	}
 
 	// Method berjalan.

@@ -25,7 +25,7 @@ public class WeaponUpgradeManager : MonoBehaviour
     Button penetButton;
 
     // Player shooting.
-    public PlayerShooting playerShooting;
+    PlayerShooting playerShooting;
 
     // Start is called before the first frame update
     void Start()
@@ -40,7 +40,7 @@ public class WeaponUpgradeManager : MonoBehaviour
         upgradeText = GameObject.Find("UpgradeText").GetComponent<Text>();
 
         // Get player shooting.
-        // playerShooting = GameObject.Find("Player").GetComponentInChildren<PlayerShooting>();
+        playerShooting = GameObject.Find("Player").GetComponentInChildren<PlayerShooting>();
     }
 
     // Update is called once per frame

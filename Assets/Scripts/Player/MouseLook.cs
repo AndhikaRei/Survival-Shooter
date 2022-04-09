@@ -8,6 +8,7 @@ public class MouseLook : MonoBehaviour
 
     public Transform player;
     public Transform gun;
+    public Transform fpsCamera;
 
     float xRotation = 0f;
 
@@ -29,7 +30,5 @@ public class MouseLook : MonoBehaviour
         transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
         //gun.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
         player.Rotate(Vector3.up * mouseX);
-
-        player.GetChild(0).localRotation = Quaternion.Euler(xRotation, 0f, 0f);
     }
 }
