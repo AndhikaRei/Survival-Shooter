@@ -15,6 +15,9 @@ public class PowerUp : MonoBehaviour
     int extraPower = 10;
     float timer;
     float maxTime = 10f;
+
+    float pickupDistance = 4f;
+
     void Awake()
     {
         // Mencari game object dengan tag player.
@@ -40,7 +43,12 @@ public class PowerUp : MonoBehaviour
     void OnTriggerEnter(Collider other){
         if(other.CompareTag("Player"))
         {
-            Pickup();    
+            // Check player distance with current power up.
+            float distance = Vector3.Distance(player.transform.position, transform.position);
+            //  If distance is shorter than pickupDistance, then power up is picked up.
+            if (distance < pickupDistance) {
+                Pickup();
+            }
         }
     }
 

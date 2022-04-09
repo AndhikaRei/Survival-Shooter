@@ -32,10 +32,12 @@ public class EnemyManager : MonoBehaviour
 
     // Enemy tag.
     public static readonly List<int> enemyTag = new List<int>() { 
-        // TODO: Add skeleton(3), bomber(4), and boss(5).
         0, // Zombear
         1, // Zombunny
         2, // Zomhellephant
+        3, // Skeleton
+        4, // Bomber
+        5, // Boss
     };
     
     // Weight of each enemy.
@@ -43,48 +45,40 @@ public class EnemyManager : MonoBehaviour
         1,
         1,
         2,
+        3,
+        2,
+        4,
     };
 
     // Max wave.
     public const int maxWave = 10;
 
-    // TODO : Add new enemies to the list.
     // Declare pool of enemy.
     public static readonly List<List<int>> enemyPool = new List<List<int>>() {
         new List<int>() { 0 }, // Wave 1
         new List<int>() { 0, 1 }, // Wave 2
-        new List<int>() { 0, 1 }, // Wave 3
-        new List<int>() { 0, }, // Wave 4
-        new List<int>() { 0, 1, }, // Wave 5
-        new List<int>() { 0, 1 }, // Wave 6
-        new List<int>() { 0 }, // Wave 7
-        new List<int>() { 0, 1 }, // Wave 8
-        new List<int>() { 0, 1 }, // Wave 9
-        new List<int>() { 0, 1, 2 }, // Wave 10
+        new List<int>() { 0, 1, 2 }, // Wave 3
+        new List<int>() { 0, 1, 2 }, // Wave 4
+        new List<int>() { 0, 1, 2, 3 }, // Wave 5
+        new List<int>() { 0, 1, 2, 3 }, // Wave 6
+        new List<int>() { 0, 1, 2, 3 }, // Wave 7
+        new List<int>() { 0, 1, 2, 3, 4 }, // Wave 8
+        new List<int>() { 0, 1, 2, 3, 4 }, // Wave 9
+        new List<int>() { 0, 1, 2, 3, 4, 5 }, // Wave 10
     };
     
     // Wave weight.
-    // TODO: make the wave more harder.
     public static readonly List<int> waveWeight = new List<int>() {
-        // 5, 
-        // 10,
-        // 16,
-        // 23,
-        // 31,
-        // 40,
-        // 50,
-        // 61,
-        // 73,
-        1, 
-        2,
-        3,
-        4,
-        5,
-        6,
-        7,
-        8,
-        9,
-        10,
+        15, 
+        20,
+        26,
+        43,
+        51,
+        60,
+        80,
+        91,
+        103,
+        136,
     };
 
     // Current wave.
@@ -171,8 +165,12 @@ public class EnemyManager : MonoBehaviour
             if (Math.Floor(Math.Floor(ScoreManager.survival_time) / 30) > WeaponUpgradeManager.maxUpgrade )
             {
                 WeaponUpgradeManager.maxUpgrade++;
-                // Divide spawn time by 2
-                spawnTime /= (float)(Math.Floor(Math.Floor(ScoreManager.survival_time) / 30));
+                float divider = (float)(Math.Floor(Math.Floor(ScoreManager.survival_time) / 30));
+                if (divider > 1) {
+                    spawnTime = spawnTime / divider * (divider - 1);
+                } else {
+                    spawnTime = spawnTime / divider;
+                }
                 CancelInvoke("SpawnZen");
                 InvokeRepeating ("SpawnZen", spawnTime, spawnTime);
             }
@@ -207,26 +205,43 @@ public class EnemyManager : MonoBehaviour
         //  Default spawn enemy.
         int spawnEnemy = 0;
 
-        // TODO: Add new enemy and boss in randomization
         // Randomize enemy with chance of each enemy.
-        // Zombunny (tag-0) = 40%
-        // Zombear (tag-1) = 40%
-        // Zomhellephant (tag-2) = 20%
+        // Zombunny (tag-0) = 25%
+        // Zombear (tag-1) = 25%
+        // Zomhellephant (tag-2) = 15%
+        // Skeleton (tag-3) = 15%
+        // Bomber (tag-4) = 15%
+        // Boss (tag-5) = 5%
         int chance = Random.Range (0, 100);
-        if (chance < 40)
+        // Spawn Zombunny.
+        if (chance < 25)
         {
-            // Spawn Zombunny.
             spawnEnemy = 0;
         }
-        else if (chance < 80)
+        // Spawn Zombear.
+        else if (chance < 50)
         {
-            // Spawn Zombear.
             spawnEnemy = 1;
         }
+        // Spawn Zomhellephant.
+        else if (chance < 65)
+        {
+            spawnEnemy = 2;
+        }
+        // Spawn Skeleton.
+        else if (chance < 80)
+        {
+            spawnEnemy = 3;
+        }
+        // Spawn Bomber
+        else if (chance < 95)
+        {
+            spawnEnemy = 4;
+        }
+        // Spawn boss
         else
         {
-            // Spawn Zomhellephant.
-            spawnEnemy = 2;
+            spawnEnemy = 5;
         }
 
         // Generate duplikat enemy.
@@ -288,9 +303,8 @@ public class EnemyManager : MonoBehaviour
 
         // If the current wave is multiple of 3 then spawn boss.
         if (currentWave % 3 == 0) {
-            // TODO: Change to spawn real boss
             // Spawn boss.
-            spawnedEnemyTag.Insert(0, 2);
+            spawnedEnemyTag.Insert(0, 5);
         }
 
         // Fill enemy amount.
@@ -316,7 +330,6 @@ public class EnemyManager : MonoBehaviour
         // Reset current wave.
         //currentWave = 0;
 
-        // TODO: Instead of making player dead, end the wave mode game.
         // Make player dead.
         playerHealth.TakeDamage(playerHealth.currentHealth);
     }

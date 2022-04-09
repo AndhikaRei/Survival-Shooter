@@ -3,7 +3,7 @@ using System.Collections;
 
 public class SkeletonAttack : MonoBehaviour
 {
-    public float timeBetweenAttacks = 0.5f;
+    public float timeBetweenAttacks = 1f;
     public int attackDamage = 5;
 
 

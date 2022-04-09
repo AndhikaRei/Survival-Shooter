@@ -14492,6 +14492,7 @@ GameObject:
   - component: {fileID: 5696685985837896074}
   - component: {fileID: 5605824825660329177}
   - component: {fileID: 5605824825660329158}
+  - component: {fileID: 3019774023017642831}
   m_Layer: 0
   m_Name: SpeedOrb
   m_TagString: Speed
@@ -19367,7 +19368,7 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5606865423555477650}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.8
@@ -19384,3 +19385,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7aab53a9d864494a93db9f602d295d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!54 &3019774023017642831
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5606865423555477650}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: Infinity
+  m_AngularDrag: Infinity
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
