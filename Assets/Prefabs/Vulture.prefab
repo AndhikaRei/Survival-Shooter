@@ -466,7 +466,7 @@ MonoBehaviour:
   currentHealth: 0
   sinkSpeed: 2.5
   scoreValue: 10
-  deathClip: {fileID: 0}
+  deathClip: {fileID: 8300000, guid: 0332fce590c3f4131ae91318052c48e4, type: 3}
   explosionClip: {fileID: 0}
   enemyManager: {fileID: 0}
   gameModeManager: {fileID: 0}
