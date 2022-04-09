@@ -26,7 +26,7 @@ public class PlayerHealth : MonoBehaviour
 
     Text healthText;
 
-    void Awake()
+    void Start()    
     {
         // Mendapatkan reference component.
         anim = GetComponent<Animator>();
@@ -34,6 +34,7 @@ public class PlayerHealth : MonoBehaviour
         playerMovement = GetComponent<PlayerMovement>();
 
         playerShooting = GetComponentInChildren<PlayerShooting>();
+
         currentHealth = startingHealth;
         
         // Get the healthText from hudcanvas.
@@ -109,6 +110,15 @@ public class PlayerHealth : MonoBehaviour
     {
         isDead = true;
 
+        // Mematikan movement.
+        playerMovement.enabled = false;
+        playerShooting.enabled = false;
+        
+        if (CameraModeManager.cameraMode == CameraMode.FPS)
+        {
+            Cursor.lockState = CursorLockMode.None;
+        }
+
         //playerShooting.DisableEffects();
 
         // Mentrigger animasi die.
@@ -118,8 +128,5 @@ public class PlayerHealth : MonoBehaviour
         playerAudio.clip = deathClip;
         playerAudio.Play();
 
-        // Mematikan movement.
-        playerMovement.enabled = false;
-        playerShooting.enabled = false;
     }
 }

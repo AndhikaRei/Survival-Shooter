@@ -8,6 +8,7 @@ TagManager:
   - Power
   - Speed
   - Health
+  - Gun
   layers:
   - Default
   - TransparentFX
@@ -17,8 +18,8 @@ TagManager:
   - UI
   - Shootable
   - Enemy
-  - 
-  - 
+  - PlayerModel
+  - Gun
   - 
   - 
   - 

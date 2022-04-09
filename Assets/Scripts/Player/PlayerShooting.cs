@@ -11,6 +11,8 @@ public class PlayerShooting : MonoBehaviour
     public float timeBetweenBullets = 0.2f;        
     public float range = 100f;
 
+    public Camera fpsCamera;
+
     // Diagonal shoot weapon upgrade.
     public int diagonalUpgrade = 0;         
 
@@ -94,7 +96,7 @@ public class PlayerShooting : MonoBehaviour
         for (int i = 0; i <= diagonalUpgrade ; i++)
         {
             // Set posisi ray shoot dan direction.
-            shootRay.origin = transform.position;
+            
             
             // Get number of lines shoot, if diagonal shoot, then shoot 2 lines else shoot 1 lines. 
             int numLines = i == 0 ? 1 : 2;
@@ -104,7 +106,16 @@ public class PlayerShooting : MonoBehaviour
                 // Perhatikan apabila i==0 maka sudut quaternion akan selalu (0,0,0)
                 // Jika i != 0 maka sudut quaternion akan berubah sesuai i (0, 30*i*j, 0), J \
                 // antara 1 atau -1.
-                shootRay.direction = Quaternion.Euler(0, i*j*10, 0) * transform.forward;
+                if (CameraModeManager.cameraMode == CameraMode.TPS) 
+                {
+                    shootRay.origin = transform.position;
+                    shootRay.direction = Quaternion.Euler(0, i*j*10, 0) * transform.forward;
+                }
+                else if (CameraModeManager.cameraMode == CameraMode.FPS)
+                {
+                    Vector3 point = Quaternion.Euler(0, i * j * 10, 0) * new Vector3(0.5f, 0.5f, 0.5f);
+                    shootRay = fpsCamera.ViewportPointToRay(point);
+                }
 
                 points.Add(transform.position);
 
