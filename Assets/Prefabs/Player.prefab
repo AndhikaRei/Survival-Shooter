@@ -5236,6 +5236,7 @@ MonoBehaviour:
   maxDamagePerShot: 50
   timeBetweenBullets: 0.15
   range: 100
+  fpsCamera: {fileID: 0}
   diagonalUpgrade: 0
   aspdUpgrade: 0
   penetUpgrade: 0
@@ -10726,6 +10727,7 @@ MonoBehaviour:
   maxDamagePerShot: 50
   timeBetweenBullets: 0.15
   range: 100
+  fpsCamera: {fileID: 0}
   diagonalUpgrade: 0
   aspdUpgrade: 0
   penetUpgrade: 0
