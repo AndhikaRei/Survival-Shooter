@@ -60,10 +60,16 @@ public class GameOverManager : MonoBehaviour
         }
     }
 
-    public void ShowWarning(float enemyDistance)
+    public void ShowWarning()
     {
-        warningText.text = string.Format("! {0} m",Mathf.RoundToInt(enemyDistance));
-        anim.SetTrigger("Warning");
+        warningText.text = string.Format("Enemy are near !!!");
+        // anim.SetTrigger("Warning");
+    }
+
+    public void RemoveWarning()
+    {
+        warningText.text = "";
+        // anim.SetTrigger("Warning");
     }
 
     public void ToMainMenu()

@@ -69,16 +69,29 @@ public class EnemyManager : MonoBehaviour
     
     // Wave weight.
     public static readonly List<int> waveWeight = new List<int>() {
+        // Easy
+        // 15 / 15, 
+        // 30 / 15 ,
+        // 45 / 15 ,
+        // 75 / 15 ,
+        // 90 / 15 ,
+        // 105 / 15 ,
+        // 135 / 15 ,
+        // 150 / 15 ,
+        // 165 / 15 ,
+        // 195 / 15 ,
+
+        // Hard
         15, 
-        20,
-        26,
-        43,
-        51,
-        60,
-        80,
-        91,
-        103,
-        136,
+        30 ,
+        45 ,
+        75 ,
+        90 ,
+        105 ,
+        135 ,
+        150 ,
+        165 ,
+        195 ,
     };
 
     // Current wave.

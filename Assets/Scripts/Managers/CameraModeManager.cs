@@ -11,7 +11,7 @@ public enum CameraMode
 
 public class CameraModeManager : MonoBehaviour
 {
-    public static CameraMode cameraMode = CameraMode.FPS;
+    public static CameraMode cameraMode = CameraMode.TPS;
 
     public void SetCameraModeFromToggle(bool check)
     {
