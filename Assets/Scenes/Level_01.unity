@@ -4563,7 +4563,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 0}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 500
+  m_MaxValue: 100
   m_WholeNumbers: 1
   m_Value: 100
   m_OnValueChanged:
@@ -5543,6 +5543,10 @@ PrefabInstance:
       value: 116
       objectReference: {fileID: 0}
     - target: {fileID: 4088190412394501222, guid: de92283ddc1937b4db3dddf7171cb55d, type: 3}
+      propertyPath: maxHealth
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 4088190412394501222, guid: de92283ddc1937b4db3dddf7171cb55d, type: 3}
       propertyPath: damageImage
       value: 
       objectReference: {fileID: 1215864811}
@@ -5585,6 +5589,10 @@ PrefabInstance:
     - target: {fileID: 4088190412513439145, guid: de92283ddc1937b4db3dddf7171cb55d, type: 3}
       propertyPath: diagonalUpgrade
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4088190412513439145, guid: de92283ddc1937b4db3dddf7171cb55d, type: 3}
+      propertyPath: maxDamagePerShot
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4088190412513439147, guid: de92283ddc1937b4db3dddf7171cb55d, type: 3}
       propertyPath: m_Parameters.alignment
@@ -5649,6 +5657,10 @@ PrefabInstance:
     - target: {fileID: 4088190413750231906, guid: de92283ddc1937b4db3dddf7171cb55d, type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4088190413750231906, guid: de92283ddc1937b4db3dddf7171cb55d, type: 3}
+      propertyPath: maxDamagePerShot
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4088190413766599931, guid: de92283ddc1937b4db3dddf7171cb55d, type: 3}
       propertyPath: m_IsActive
