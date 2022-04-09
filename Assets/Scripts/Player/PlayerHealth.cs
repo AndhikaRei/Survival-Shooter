@@ -9,7 +9,7 @@ public class PlayerHealth : MonoBehaviour
     public static string playerName = "Player";
     public int startingHealth = 100;
     public int currentHealth;
-    public int maxHealth = 300;
+    public int maxHealth = 500;
     public Slider healthSlider;
     public Image damageImage;
     public AudioClip deathClip;
@@ -70,7 +70,11 @@ public class PlayerHealth : MonoBehaviour
         // Mengurangi currentHealth dengan amount.
         currentHealth -= amount;
 
-        // Update health slider.
+        // Update health slider and text.
+        if(currentHealth < 0){
+            currentHealth = 0;
+        }
+        healthText.text = currentHealth.ToString();
         healthSlider.value = currentHealth;
 
         // Memaindkan audio ketika terkena damage.
@@ -82,6 +86,23 @@ public class PlayerHealth : MonoBehaviour
         {
             Death();
         }
+    }
+
+    public void PickupOrb(int amount)
+    {
+        // Menambahkan currentHealth dengan amount.
+        if(currentHealth + amount >= maxHealth){
+            currentHealth = maxHealth;
+        }else{
+            currentHealth += amount;
+        }
+        
+        // Update health slider and health data.
+        if(currentHealth > healthSlider.maxValue){
+            healthSlider.maxValue = currentHealth;
+        }
+        healthSlider.value = currentHealth;
+        healthText.text = currentHealth.ToString();
     }
 
 

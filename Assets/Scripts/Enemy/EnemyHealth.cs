@@ -7,6 +7,7 @@ public class EnemyHealth : MonoBehaviour
     public float sinkSpeed = 2.5f;
     public int scoreValue = 10;
     public AudioClip deathClip;
+    public AudioClip explosionClip;
     // Enemy manager.
     public EnemyManager enemyManager;
     // Game mode manager.
@@ -90,6 +91,23 @@ public class EnemyHealth : MonoBehaviour
             enemyManager.killedEnemyAmount++;
             ScoreManager.score += scoreValue;
         }
+    }
+
+    public void SelfDestruction()
+    {
+        // Set isDead.
+        isDead = true;
+        currentHealth = 0;
+
+        // Set CapsuleCollider ke trigger.
+        capsuleCollider.isTrigger = true;
+
+        // Play animasi dead.
+        anim.SetTrigger ("Dead");
+
+        // Play audio explosion.
+        enemyAudio.clip = explosionClip;
+        enemyAudio.Play ();
     }
 
 
