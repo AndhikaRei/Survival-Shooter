@@ -5,7 +5,7 @@ public class SkeletonAttack : MonoBehaviour
 {
     public float timeBetweenAttacks = 1f;
     public int attackDamage = 5;
-
+    public GameObject fireballEffect;
 
     Animator anim;
     GameObject player;
@@ -60,7 +60,8 @@ public class SkeletonAttack : MonoBehaviour
     {
         // Reset Timer.
         timer = 0f;
-
+        GameObject effect = Instantiate (fireballEffect, transform.position, transform.rotation);
+        Destroy (effect, 1.0f);
         // Taking damage.
         if (playerHealth.currentHealth > 0)
         {
