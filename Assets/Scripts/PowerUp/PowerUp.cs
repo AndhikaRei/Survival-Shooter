@@ -13,6 +13,8 @@ public class PowerUp : MonoBehaviour
     int extraHealth = 50;
     float extraSpeed = 0.5f;
     int extraPower = 10;
+    float timer;
+    float maxTime = 5f;
     void Awake()
     {
         // Mencari game object dengan tag player.
@@ -28,7 +30,10 @@ public class PowerUp : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        timer += Time.deltaTime;
+        if(timer >= maxTime){
+            Destroy(gameObject);
+        }
     }
 
     void OnTriggerEnter(Collider other){
