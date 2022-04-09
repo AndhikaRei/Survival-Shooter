@@ -5,11 +5,14 @@ using UnityEngine.UI;
 
 public class PowerUp : MonoBehaviour
 {
+    AudioSource pickupAudio;
+
     PlayerHealth playerHealth;
     PlayerMovement playerMovement;
     PlayerShooting playerShooting;
     GameObject player;
     GameObject gunBarrelEnd;
+
     int extraHealth = 50;
     float extraSpeed = 0.5f;
     int extraPower = 10;
@@ -20,6 +23,7 @@ public class PowerUp : MonoBehaviour
 
     void Awake()
     {
+        pickupAudio = GetComponent<AudioSource>();
         // Mencari game object dengan tag player.
         player = GameObject.FindGameObjectWithTag ("Player");
         gunBarrelEnd = GameObject.Find("GunBarrelEnd");
@@ -55,6 +59,9 @@ public class PowerUp : MonoBehaviour
     void Pickup(){
         Debug.Log(gameObject.tag + " Orb has being picked up!");
 
+        transform.position += Vector3.down * 5;
+
+        pickupAudio.Play();
         // Add stats to player
         if (gameObject.CompareTag("Health"))
         {
@@ -68,6 +75,6 @@ public class PowerUp : MonoBehaviour
         }
 
         // Destroy orb after being picked up
-        Destroy(gameObject);
+        Destroy(gameObject, pickupAudio.clip.length);
     }
 }
