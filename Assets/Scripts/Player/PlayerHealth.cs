@@ -56,7 +56,7 @@ public class PlayerHealth : MonoBehaviour
             // Fade out damage image.
             damageImage.color = Color.Lerp(damageImage.color, Color.clear, flashSpeed * Time.deltaTime);
         }
-        
+        healthText.text = currentHealth.ToString();
         damaged = false;
     }
 
