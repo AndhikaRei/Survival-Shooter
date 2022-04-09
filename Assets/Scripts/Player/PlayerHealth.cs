@@ -56,7 +56,7 @@ public class PlayerHealth : MonoBehaviour
             // Fade out damage image.
             damageImage.color = Color.Lerp(damageImage.color, Color.clear, flashSpeed * Time.deltaTime);
         }
-        healthText.text = currentHealth.ToString();
+        
         damaged = false;
     }
 
@@ -69,7 +69,11 @@ public class PlayerHealth : MonoBehaviour
         // Mengurangi currentHealth dengan amount.
         currentHealth -= amount;
 
-        // Update health slider.
+        // Update health slider and text.
+        if(currentHealth < 0){
+            currentHealth = 0;
+        }
+        healthText.text = currentHealth.ToString();
         healthSlider.value = currentHealth;
 
         // Memaindkan audio ketika terkena damage.
@@ -93,6 +97,9 @@ public class PlayerHealth : MonoBehaviour
         }
         
         // Update health slider and health data.
+        if(currentHealth > healthSlider.maxValue){
+            healthSlider.maxValue = currentHealth;
+        }
         healthSlider.value = currentHealth;
         healthText.text = currentHealth.ToString();
     }

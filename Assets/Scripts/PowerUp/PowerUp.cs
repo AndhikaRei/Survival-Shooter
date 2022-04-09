@@ -14,7 +14,7 @@ public class PowerUp : MonoBehaviour
     float extraSpeed = 0.5f;
     int extraPower = 10;
     float timer;
-    float maxTime = 5f;
+    float maxTime = 10f;
     void Awake()
     {
         // Mencari game object dengan tag player.
@@ -32,6 +32,7 @@ public class PowerUp : MonoBehaviour
     {
         timer += Time.deltaTime;
         if(timer >= maxTime){
+            Debug.Log(gameObject.tag + " Orb has being destroyed!");
             Destroy(gameObject);
         }
     }
