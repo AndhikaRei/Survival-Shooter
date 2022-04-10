@@ -136,6 +136,16 @@ public class EnemyManager : MonoBehaviour
 
     void Update ()
     {
+
+        // Print killed enemy amount against spawned amount
+        if (spawnedEnemyAmount > 0)
+        {
+            Debug.Log("Killed: " + killedEnemyAmount + " / " + spawnedEnemyAmount);
+        }
+        else
+        {
+            Debug.Log("Killed: " + killedEnemyAmount);
+        }
         // If the game is wave mode check some event.
         if (GameModeManager.gameMode == GameMode.Wave && currentWave != 0)
         {
@@ -147,7 +157,7 @@ public class EnemyManager : MonoBehaviour
 
             // If the killed enemy amount is equal to the spawned enemy amount and wave has 
             // been started then start the next wave.
-            if (killedEnemyAmount == spawnedEnemyAmount)
+            if (killedEnemyAmount >= spawnedEnemyAmount-1)
             {
                 // If current finished wave is divisible by 3 then let player to upgrade weapon.
                 if (currentWave % 3 == 0)
