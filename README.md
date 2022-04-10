@@ -1,92 +1,165 @@
-# IF3210-2022-Unity-06
+# Tugas Besar Unity
+# IF3210 Pengembangan Aplikasi pada Platform Khusus
 
-Tugas Besar 2 Pengembangan Aplikasi Platform Khusus- Unity
+# Anggota
+1. Gde Anantha Priharsena - 13519026
+2. Reihan Andhika Putra - 13519043
+3. Reyhan Emyr Arrosyid - 13519167
 
-## Getting started
+# Deskripsi Aplikasi
+Survival Shooter: Extended adalah sebuah game ekstensi dari Survival Shooter dari Unity Learn yang dibangun pada platform Unity dengan bahasa pemrograman C#. Game ini memiliki beberapa spesifikasi antara lain: <br/>
+    
+1. Attribute Player<br/>
+   Setiap atribut ditampilkan pada layar. Setiap atribut memiliki nilai awal dan batas maksimal tertentu.
+   - Power <br/>
+    Menyatakan kekuatan shoot pemain.
+   - Speed <br/>
+    Menyatakan kecepatan pemain dalam bergerak.
+   - Health <br/>
+    Menyatakan jumlah nyawa pemain.
+2. Orbs<br/>
+    Terdapat beberapa objek orb yang dapat diambil oleh player untuk meningkatkan atribut pemain secara permanen. Orb akan muncul random secara periodik pada terrain yang bisa dilalui.pemain. Setelah beberapa waktu, jika tidak diambil oleh player, orb akan hilang dari map.
+   - Power Orb<br/>
+    Meningkatkan kekuatan shoot pemain.
+   - Speed Orb<br/>
+    Meningkatkan kecepatan pemain dalam bergerak.
+   - Health Orb<br/>
+    Meningkatkan jumlah nyawa pemain.
+3. Mobs<br/>
+    Tambahkan beberapa mobs pada game, di antaranya:
+   - Zombunny<br/>
+    Mobs boneka zombie yang berbentuk kelinci, memiliki serangan skala kecil.
+   - Zombear<br/>
+    Mobs boneka zombie yang berbentuk beruang, memiliki serangan skala menengah.
+   - Hellephant<br/>
+    Mobs boneka zombie yang berbentuk gajah, memiliki serangan skala besar.
+   - Skeleton<br/>
+    Mobs berbentuk vulture yang tidak bisa bergerak, namun bisa menyerang dari jauh dengan Earth Shatter.
+   - Bomber<br/>
+    Mobs berbentuk Lava Leaper ini bergerak dua kali lebih cepat dari musuh biasa, dengan tujuan meledakkan diri (self-suicide).
+   - Boss<br/>
+    Mobs ini memiliki ukuran dan nyawa yang lebih besar dari mob biasa.
+4. Game Mode<br/>
+   - Zen Mode<br/>
+    Mirip seperti game asli, namun hasil skor berdasarkan waktu survival.
+   - Wave Mode<br/>
+       1. Setiap wave memiliki kapasitas bobot (weight) untuk musuh yang akan di-spawn.
+       2. Setiap wave memiliki pool musuh yang mungkin keluar.
+       3. Musuh semakin sulit untuk tiap wave, dalam kata lain tiap wave memiliki kapasitas bobot yang meningkat.
+       4. Setiap wave dengan nomor kelipatan 3, akan memiliki sebuah boss mobs sebagai lawan dan beberapa mobs lain. Boss mob ini tidak memiliki bobot.
+       5. Terdapat jumlah maksimal 10 Wave
+       6. Pada wave ini, setiap musuh yang dibunuh memberikan skor yang telah ditentukan.
+5. Weapon Upgrade<br/>
+    Weapon dapat di-upgrade agar menjadi lebih kuat. Berikut adalah weapon upgrade yang dapat dilakukan Player:
+   - Diagonal Weapon<br/>
+    Menambahkan 2 bullet ke arah diagonal kiri dan kanan.
+   - Faster Weapon<br/>
+    Meningkatkan kecepatan tembak senjata.
+   - Highly Penetration Weapon<br/>
+    Meningkatkan kekuatan penetrasi senjata.
+6. Camera View <br/>
+   Perspektif player dapat diubah sesuai dengan preferensi pemain. Berikut adalahn camera view yang dapat dipilih oleh Player:
+    - TPS Mode<br/>
+        Perspektif sudut pandang orang ketiga yang membuat player dapat melihat dari atas.
+    - FPS Mode<br/>
+        Perspektif sudut pandang orang pertama yang membuat player di belakang senjata.
+  
+7. Local Scoreboard<br/>
+   Menampilkan riwayat skor hasil permainan, terurut dari skor terbaik dan memiliki halaman untuk masing-masing Game Mode berbeda.
+   - Scoreboard untuk Zen / Endless Mode menampilkan nama pemain, dan waktu survival.<br/>
+   - Scoreboard untuk Wave Mode menampilkan nama pemain, wave terjauh dan skor total yang didapat dalam satu kali bermain.<br/>
+  
+8.  Main Menu<br/>
+   Terdapat settings untuk mengatur beberapa hal berikut:<br/>
+    - Menentukan nama pemain.
+    - Memilih Game Mode.
+    - Membuka Local Scoreboard.
+  
+9.  Game Over<br/>
+    Saat permainan selesai, tampilkan layar Game Over yang menampilkan performa hasil permainan bergantung Game Mode:
+    - Zen Mode <br/>
+        Menampilkan waktu survival permainan.
+    - Wave Mode<br/>
+        Menampilkan wave dan skor yang didapat.
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+# Cara Kerja Game
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+## Attribute Player
+Attribute player pada game akan ditampilkan pada sebelah kiri atas layar saat game sudah dimulai (baik Zen Mode maupun Wave Mode). Attritue player akan ditampilkan secara terurut yaitu Power, Speed, dan Health. Untuk attribute health, terdapat visualisasi tambahan yaitu Health Bar yang ada di sebelah kiri bawah layar.
 
-## Add your files
+## Orbs
+Orbs dapat digunakan Player untuk menambah attribute player secara permanen. Untuk menggunakan orbs, Player dapat mengambil orbs sebelum orbs tersebut hilang dari layar permainan. Jika player mengambil orbs berwarna hijau, attribute power akan bertambah. Jika player mengambil orbs berwarna kuning, attribute speed akan bertambah. Jika player mengambil orbs berwarna merah, attribute health akan bertambah.
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
+## Mobs
+Mobs akan muncul pada game sesuai dengan aturan yang berlaku pada mode yang dipilih user. Setiap mobs memiliki jenis serangan dan kecepatan yang berbeda-beda. Player harus membunuh mobs tersebut untuk bertahan dan memenangkan game.
 
-```
-cd existing_repo
-git remote add origin https://gitlab.informatika.org/AndhikaRei/if3210-2022-unity-06.git
-git branch -M main
-git push -uf origin main
-```
+## Game Mode
+Terdapat dua jenis mode yang dapat dipilih oleh Player yaitu Zen Mode dan Wave Mode. Untuk memilih game mode, Player dapat menuju Main Menu. Klik Play. Kemudian klik dropdown Game Mode dan memilih game mode yang diinginkan. Kemudian klik Start untuk memulai permainan.
 
-## Integrate with your tools
+## Weapon Upgrade
+Dalam sebuah kondisi tertentu, Player dapat melakukan weapon upgrade. Hal ini juga dapat diketahui dengan munculnya tulisan "Upgrade is Available" diatas pilihan-pilihan waepon upgrade. Untuk melakukan upgrade Diagonal Weapon, ketik 1. Untuk melakukan upgrade Faster Weapon, ketik 2. Untuk melakukan upgrade Highly Penetration Weapon, ketik 3.
 
-- [ ] [Set up project integrations](https://gitlab.informatika.org/AndhikaRei/if3210-2022-unity-06/-/settings/integrations)
+## Camera View
+Terdapat dua jenis camera view yang dapat dipilih oleh Player yaitu TPS dan FPS. Untuk memilih camera view, Player dapat menuju Main Menu. Klik Play. Secara default, tombol FPS dalam posisi unchecked. Check tombol FPS untuk memilih camera view FPS dan Uncheck tombol FPS untuk memilih camera view TPS. Kemudian klik Start untuk memulai permainan.
 
-## Collaborate with your team
+## Local Scoreboard
+Terdapat dua jenis local scoreboard yang dapat dilihat oleh Player yaitu Zen Mode Scoreboard dan Wave Mode Scoreboard. Untuk memilih game mode, Player dapat menuju Main Menu. Klik Scoreboard. Klik Zen untuk menampilkan Zen Mode Scoreboard. Klik Wava untuk menampilkan Wave Mode Scoreboard. Klik X untuk kembali ke Main Menu.
 
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Automatically merge when pipeline succeeds](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
+## Main Menu
+Untuk mengakses Main Menu dapat dilakukan dengan menjalankan Game atau memilih Main Menu saat player berada dalam menu Game Over.
 
-## Test and Deploy
+## Game Over
+Menu Game Over akan ditampilkan secara otomatis saat Player menyelesaikan permainan. Menu Game Over akan menampilkan performa player pada permainan tersebut bergantung pada game mode yang dipilih user. Pada menu ini juga player dapat memilih untuk memulai game baru dan kembali ke Main Menu.
 
-Use the built-in continuous integration in GitLab.
+# Library External
+1. [Casual Game Sound](https://assetstore.unity.com/packages/audio/sound-fx/free-casual-game-sfx-pack-54116) -> Library ini digunakan untuk memberikan sound effect untuk beberapa events yang terjadi pada game.
+2. [Dark UI](https://assetstore.unity.com/packages/2d/gui/dark-theme-ui-199010) -> Library ini digunakan untuk membuat kustomisasi pada Main menu dalam melakukan Game Setting.
+3. [Unity Particle Pack](https://assetstore.unity.com/packages/essentials/tutorial-projects/unity-particle-pack-127325#description) -> Library ini digunakan untuk memberikan beberapa effect khusus pada mob bomber dan mob skeleton.
+4. [Glowing Orb Pack ](https://unityassetcollection.com/glowing-orbs-pack-free-download/) -> Library ini digunakan untuk menambahkan prefab power orb, speed orb, dan health orb.
+5. [Monster Pack Vol 1](https://unityassetcollection.com/monster-pack-vol-1-free-download/)] -> Library ini digunakan untuk menambahkan prefab skeleton (vulture), bomber (lava leaper), dan boss (StoneMan) yang dijadikan sebagai mobs tambahan.
 
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing(SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
 
-***
+# UI Aplikasi
 
-# Editing this README
+## Attribute Player
+![Attribute](screenshot/attribute.png)
+## Orbs
+![Orbs](screenshot/Orbs.png)
+![Power Orb](screenshot/PowerOrb.png)
+![Speed Orb](screenshot/SpeedOrb.png)
+![Health Orb](screenshot/HealthOrb.png)
+## Mobs
+![Mobs](screenshot/Mobs.png)
+![Boss](screenshot/Boss.png)
+## Game Mode
+![Select](screenshot/GameModeSelect.png)
+![Zen](screenshot/Zen.png)
+![Wave](screenshot/Wave.png)
+## Weapon Upgrade
+![WeaponUpgrade](screenshot/WeaponUpgrade.png)
+## Camera View
+![ViewSelect](screenshot/ViewSelect.png)
+## Local Scoreboard
+![Zen](screenshot/ZenLB.png)
+![Wave](screenshot/WaveLB.png)
+## Main Menu
+![Main 1](screenshot/Main1.png)
+![Main 2](screenshot/Main2.png)
+## Game Over
+![GameOver 1](screenshot/Gameover1.png)
+![Gameover 2](screenshot/Gameover2.png)
 
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!).  Thank you to [makeareadme.com](https://www.makeareadme.com/) for this template.
-
-## Suggestions for a good README
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
-
-## Name
-Choose a self-explaining name for your project.
-
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
-
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
-
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
-
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
-
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
-
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
-
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
-
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
-
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
-
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
-
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
-
-## License
-For open source projects, say how it is licensed.
-
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+# Pembagian Kerja 
+1. 13519026 - Gde Anantha Priharsena 
+   - Attribute Player
+   - Orbs
+   - Additional Mobs
+2. 13519043 - Reihan Andhika Putra
+   - Game Mode
+   - Weapon Upgrade
+3. 13519167 - Reyhan Emyr Arrosyid
+   - Local Scoreboard
+   - Main Menu
+   - Game Over
+   - Bonus : Menambah Weapon Upgrade
+   - Bonus : Menambah First Person Mode
